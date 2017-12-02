@@ -28778,7 +28778,7 @@ app.get('*.js', function (req, res, next) {
   res.header('Content-Encoding', 'gzip');
   next();
 });
-app.use((0, _serveFavicon2.default)(_path2.default.join(__dirname, 'favicon.ico')));
+app.use((0, _serveFavicon2.default)(_path2.default.join(__dirname,  false ? '../../static/favicon.ico' : 'favicon.ico')));
 
 var viewPath = _path2.default.join(__dirname, '../client');
 
@@ -28786,7 +28786,7 @@ app.set('views', viewPath);
 app.set('view engine', 'ejs');
 app.engine('.ejs', _ejs2.default.__express);
 
-console.log('>>>MPP process.env.NODE_ENV = ', process.env.NODE_ENV);
+console.log('>>>JohnBlog process.env.NODE_ENV = ', process.env.NODE_ENV);
 var options = {
   maxAge: '1d'
 };
@@ -28809,6 +28809,24 @@ app.use(function (req, res, next) {
   }
   next();
 });
+
+if (false) {
+  var webpack = require('webpack');
+  var webpackConfig = require('../webpack/client.config.js');
+  var webpackDevMiddleware = require('webpack-dev-middleware');
+  var webpackHotMiddleware = require('webpack-hot-middleware');
+  var compiler = webpack(webpackConfig);
+
+  app.use(webpackDevMiddleware(compiler, {
+    // noInfo: true,
+    stats: {
+      colors: true
+    }
+  }));
+  // enable hot-reload and state-preserving
+  // compilation error display
+  app.use(webpackHotMiddleware(compiler));
+}
 
 app.use('/api', _apiRoutes2.default);
 
@@ -58285,7 +58303,6 @@ var ArticleCard = function (_Component) {
         value: function render() {
             var _this2 = this;
 
-            console.log(_head2.default);
             return _react2.default.createElement(
                 'div',
                 { className: 'row' },
@@ -60217,7 +60234,7 @@ function createStore(preloadedState) {
 
   middleware.push(sagaMiddleware);
 
-  if (process.env.NODE_ENV == 'development' && false) {
+  if (false) {
     middleware.push((0, _reduxLogger.createLogger)());
 
     enhancedCompose = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({

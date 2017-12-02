@@ -58799,7 +58799,7 @@ var BlogDetail = function (_Component) {
         this.props.loading ? _react2.default.createElement(
           'div',
           null,
-          'loading'
+          'Loading...'
         ) : _react2.default.createElement('article', { className: _BlogDetail2.default.article, dangerouslySetInnerHTML: { __html: this.props.content } })
       );
     }

@@ -195,12 +195,14 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 4px; }
   ._1mi_UV6shGi88RM74mf2sA header {
+    border-radius: 4px 4px 0 0;
     cursor: pointer;
     height: 200px;
     padding: 0 16px;
-    background-color: #0099ff;
+    background-color: #607d8b;
     background-size: 900px 200px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -376,11 +378,24 @@ body {
     background-color: white;
     height: 400px;
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 4px; }
     ._35NySRyg_zXzBIRGYM3VbL .KwU4EQf8zqRQQKcaZH18Q header {
+      border-radius: 4px 4px 0 0;
       height: 336px;
       background-image: url(http://45.77.248.142:80/848c90b3fdacf79ba9299706be8ed5b5.jpg);
-      background-size: 100% 336px; }
+      background-size: 100% 336px;
+      padding: 20px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: end;
+          -ms-flex-align: end;
+              align-items: flex-end; }
+      ._35NySRyg_zXzBIRGYM3VbL .KwU4EQf8zqRQQKcaZH18Q header div {
+        color: white;
+        font-size: 24px;
+        font-weight: 300; }
     ._35NySRyg_zXzBIRGYM3VbL .KwU4EQf8zqRQQKcaZH18Q footer {
       height: 64px;
       padding: 0 15px;
@@ -396,17 +411,53 @@ body {
               justify-content: flex-start;
       -webkit-box-align: center;
           -ms-flex-align: center;
-              align-items: center; }
+              align-items: center;
+      font-weight: 700;
+      color: #757575; }
       ._35NySRyg_zXzBIRGYM3VbL .KwU4EQf8zqRQQKcaZH18Q footer img {
         width: 32px;
         height: 32px;
         border-radius: 50%;
         margin-right: 15px; }
   ._35NySRyg_zXzBIRGYM3VbL ._2ucFsYIsINkgHM8dhlRCyu {
+    border-radius: 4px;
     background-color: white;
     height: 400px;
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between; }
+    ._35NySRyg_zXzBIRGYM3VbL ._2ucFsYIsINkgHM8dhlRCyu div:nth-child(1) {
+      position: relative;
+      height: 75px; }
+      ._35NySRyg_zXzBIRGYM3VbL ._2ucFsYIsINkgHM8dhlRCyu div:nth-child(1) ._3vsqh0kqgdKNvSV82pJcLc {
+        background-color: #607d8b;
+        position: absolute;
+        top: -24px;
+        right: 24px;
+        -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2); }
+    ._35NySRyg_zXzBIRGYM3VbL ._2ucFsYIsINkgHM8dhlRCyu div:nth-child(2) {
+      padding: 0 50px;
+      height: 150px; }
+      ._35NySRyg_zXzBIRGYM3VbL ._2ucFsYIsINkgHM8dhlRCyu div:nth-child(2) .Ed55kjnpEVAknv-SWBOVu {
+        border-radius: 20px;
+        height: 100%;
+        background-image: url(http://45.77.248.142:80/daf9db159bc215ca454f2b64546b91a1.jpg);
+        background-size: cover; }
+    ._35NySRyg_zXzBIRGYM3VbL ._2ucFsYIsINkgHM8dhlRCyu div:nth-child(3) {
+      height: 75px;
+      padding: 20px;
+      font-weight: 700;
+      color: #757575; }
 ._2hJP81FBnAOIr-vTSKEo6L {
   background-color: #fff;
   -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);

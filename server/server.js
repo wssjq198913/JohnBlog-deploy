@@ -28491,6 +28491,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+if (false) {
+    var nprogress = require('nprogress');
+}
+
 exports.default = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(url, method, data) {
         var fetchOptions, options, response, json;
@@ -28498,6 +28502,9 @@ exports.default = function () {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
+                        if (false) {
+                            nprogress.start();
+                        }
                         fetchOptions = {
                             method: method,
                             headers: {
@@ -28507,28 +28514,35 @@ exports.default = function () {
                             credentials: 'same-origin'
                         };
                         options = _extends({}, fetchOptions, { body: data });
-                        _context.next = 4;
+                        _context.next = 5;
                         return (0, _isomorphicFetch2.default)(url, options);
 
-                    case 4:
+                    case 5:
                         response = _context.sent;
 
                         if (!(response.status >= 200 && response.status < 300)) {
-                            _context.next = 12;
+                            _context.next = 14;
                             break;
                         }
 
-                        _context.next = 8;
+                        _context.next = 9;
                         return response.json();
 
-                    case 8:
+                    case 9:
                         json = _context.sent;
+
+                        if (false) {
+                            nprogress.done();
+                        }
                         return _context.abrupt('return', json);
 
-                    case 12:
+                    case 14:
+                        if (false) {
+                            nprogress.done();
+                        }
                         throw response.statusText;
 
-                    case 13:
+                    case 16:
                     case 'end':
                         return _context.stop();
                 }
@@ -58770,24 +58784,24 @@ var BlogDetail = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'container' },
-        _react2.default.createElement(_index.GoTop, null),
-        _react2.default.createElement(_index.Navbar, null),
-        _react2.default.createElement(_index.Burger, { click: function click(e) {
-            return _this2.props.showMenu(e);
-          } }),
-        _react2.default.createElement(
+        this.props.loading ? _react2.default.createElement('div', null) : _react2.default.createElement(
           'div',
-          { className: 'row' },
+          null,
+          _react2.default.createElement(_index.GoTop, null),
+          _react2.default.createElement(_index.Navbar, null),
+          _react2.default.createElement(_index.Burger, { click: function click(e) {
+              return _this2.props.showMenu(e);
+            } }),
           _react2.default.createElement(
-            'header',
-            { className: _BlogDetail2.default['article-header'] },
-            this.props.params.topic
-          ),
-          this.props.loading ? _react2.default.createElement(
             'div',
-            null,
-            'Loading... please wait for a while...'
-          ) : _react2.default.createElement('article', { className: _BlogDetail2.default.article, dangerouslySetInnerHTML: { __html: this.props.content } })
+            { className: 'row' },
+            _react2.default.createElement(
+              'header',
+              { className: _BlogDetail2.default['article-header'] },
+              this.props.params.topic
+            ),
+            _react2.default.createElement('article', { className: _BlogDetail2.default.article, dangerouslySetInnerHTML: { __html: this.props.content } })
+          )
         )
       );
     }

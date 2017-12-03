@@ -28493,6 +28493,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 if (false) {
     var nprogress = require('nprogress');
+    nprogress.configure({ trickleRate: 0.1, trickleSpeed: 500 });
 }
 
 exports.default = function () {

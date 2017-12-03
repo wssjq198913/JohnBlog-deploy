@@ -57794,7 +57794,7 @@ var BlogList = function (_Component) {
   _createClass(BlogList, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      (0, _jquery2.default)(window).scrollTop(0);
+      (0, _jquery2.default)('html').scrollTop(0);
       (0, _jquery2.default)('body').removeClass('menu-collapsed');
       if (this.props.blogs == null || this.props.blogs.length == 0) {
         this.props.load();
@@ -57802,10 +57802,10 @@ var BlogList = function (_Component) {
       this.props.cleanBlogDetail();
       if (false) {
         window.setTimeout(function () {
-          (0, _jquery2.default)(window).scrollTop(0);
           require('jquery-lazy');
           (0, _jquery2.default)('.lazy').lazy({ bind: 'event' });
         }, 0);
+        (0, _jquery2.default)(window).scrollTop(0);
       }
     }
   }, {
@@ -58856,9 +58856,7 @@ var BlogDetail = function (_Component) {
   _createClass(BlogDetail, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      window.setTimeout(function () {
-        (0, _jquery2.default)(window).scrollTop(0);
-      }, 0);
+      (0, _jquery2.default)('html').scrollTop(0);
       if (this.props.content == null || this.props.content == '' || this.props.topic != this.props.params.topic) {
         this.props.load(this.props.params.year + '/' + this.props.params.month + '/' + this.props.params.day, this.props.params.topic);
       }

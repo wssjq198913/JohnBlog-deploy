@@ -58421,6 +58421,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var cx = _bind2.default.bind(_Playbar2.default);
 var tag = false;
+var mouseMoveType = null;
 var progressLenth = 490;
 
 var Playbar = function (_Component) {
@@ -58451,12 +58452,16 @@ var Playbar = function (_Component) {
             var _this2 = this;
 
             (0, _jquery2.default)(document).on('mouseup', function (event) {
-                tag = false;
-                event.stopPropagation();
-                (0, _jquery2.default)('audio')[0].currentTime = _this2.state.progress * (0, _jquery2.default)('audio')[0].duration;
+                if (mouseMoveType == 'progress') {
+                    tag = false;
+                    event.stopPropagation();
+                    (0, _jquery2.default)('audio')[0].currentTime = _this2.state.progress.substring(0, _this2.state.progress.length - 1) / 100 * (0, _jquery2.default)('audio')[0].duration;
+                }
+                mouseMoveType = null;
             });
             (0, _jquery2.default)(document).on('mousemove', function (event) {
                 if (tag) {
+                    mouseMoveType = 'progress';
                     var originalPageX = (0, _jquery2.default)('.' + _Playbar2.default['play-progress']).offset().left;
                     var progress = (event.pageX - originalPageX) / progressLenth;
                     if (event.pageX - originalPageX <= 0) {

@@ -58441,44 +58441,59 @@ var Playbar = function (_Component) {
         _this.state = {
             locked: true,
             isRunning: false,
-            progress: 0
+            progress: 0,
+            duration: '00:00',
+            playedTime: '00:00'
         };
         return _this;
     }
 
     _createClass(Playbar, [{
+        key: 'convert',
+        value: function convert(value) {
+            return Math.floor(value / 60).toString().padStart(2, '0') + ':' + Math.round(value % 60 ? value % 60 : '00').toString().padStart(2, '0');
+        }
+    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
             var _this2 = this;
 
-            (0, _jquery2.default)(document).on('mouseup', function (event) {
-                if (mouseMoveType == 'progress') {
-                    tag = false;
-                    event.stopPropagation();
-                    (0, _jquery2.default)('audio')[0].currentTime = _this2.state.progress.substring(0, _this2.state.progress.length - 1) / 100 * (0, _jquery2.default)('audio')[0].duration;
-                }
-                mouseMoveType = null;
-            });
-            (0, _jquery2.default)(document).on('mousemove', function (event) {
-                if (tag) {
-                    mouseMoveType = 'progress';
-                    var originalPageX = (0, _jquery2.default)('.' + _Playbar2.default['play-progress']).offset().left;
-                    var progress = (event.pageX - originalPageX) / progressLenth;
-                    if (event.pageX - originalPageX <= 0) {
-                        progress = 0;
-                    } else if (event.pageX - originalPageX > progressLenth) {
-                        progress = 100 / progressLenth;
+            window.setTimeout(function () {
+                (0, _jquery2.default)(document).on('mouseup', function (event) {
+                    if (mouseMoveType == 'progress') {
+                        tag = false;
+                        event.stopPropagation();
+                        (0, _jquery2.default)('audio')[0].currentTime = _this2.state.progress.substring(0, _this2.state.progress.length - 1) / 100 * (0, _jquery2.default)('audio')[0].duration;
                     }
-                    _this2.setState({ 'progress': progress * 100 + '%' });
-                    event.stopPropagation();
-                }
-            });
-            var vid = (0, _jquery2.default)('audio')[0];
-            vid.ontimeupdate = function () {
-                if (!tag) {
-                    _this2.setState({ 'progress': vid.currentTime / vid.duration * 100 + '%' });
-                }
-            };
+                    mouseMoveType = null;
+                });
+                (0, _jquery2.default)(document).on('mousemove', function (event) {
+                    if (tag) {
+                        mouseMoveType = 'progress';
+                        var originalPageX = (0, _jquery2.default)('.' + _Playbar2.default['play-progress']).offset().left;
+                        var progress = (event.pageX - originalPageX) / progressLenth;
+                        if (event.pageX - originalPageX <= 0) {
+                            progress = 0;
+                        } else if (event.pageX - originalPageX > progressLenth) {
+                            progress = 100 / progressLenth;
+                        }
+                        _this2.setState({ 'progress': progress * 100 + '%' });
+                        event.stopPropagation();
+                    }
+                });
+                var vid = (0, _jquery2.default)('audio')[0];
+                vid.src = _2.default;
+                vid.onloadeddata = function () {
+                    _this2.setState({ 'duration': _this2.convert(vid.duration) });
+                };
+
+                vid.ontimeupdate = function () {
+                    if (!tag) {
+                        _this2.setState({ 'progress': vid.currentTime / vid.duration * 100 + '%' });
+                        _this2.setState({ 'playedTime': _this2.convert(vid.currentTime) });
+                    }
+                };
+            }, 0);
         }
     }, {
         key: 'lockPlaybar',
@@ -58529,7 +58544,7 @@ var Playbar = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 { className: playbarClass },
-                _react2.default.createElement('audio', { src: _2.default }),
+                _react2.default.createElement('audio', null),
                 _react2.default.createElement(
                     'div',
                     { className: _Playbar2.default.left },
@@ -58572,9 +58587,19 @@ var Playbar = function (_Component) {
                                 _react2.default.createElement('div', { style: { 'width': this.state.progress }, className: _Playbar2.default.played }),
                                 _react2.default.createElement('span', { style: { 'left': this.state.progress }, onMouseDown: function onMouseDown(e) {
                                         return _this3.progressMoveStart(e);
-                                    }, className: _Playbar2.default.dot })
-                            ),
-                            _react2.default.createElement('div', { className: _Playbar2.default.time })
+                                    }, className: _Playbar2.default.dot }),
+                                _react2.default.createElement(
+                                    'span',
+                                    { className: _Playbar2.default.time },
+                                    _react2.default.createElement(
+                                        'span',
+                                        { className: _Playbar2.default['played-time'] },
+                                        this.state.playedTime
+                                    ),
+                                    '/',
+                                    this.state.duration
+                                )
+                            )
                         )
                     )
                 ),
@@ -58604,7 +58629,7 @@ exports.default = Playbar;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"playbar":"_2Y-tL3L1kx61UQcJTlBEJB","left":"_1B4xNNBzaLR4p8zi7kXo9e","lock-section":"pgobEfvylUbensiDpFUuG","lock":"_3TpsLcjQmf9SKl7MU9o6A7","fill":"_1mxXyKJHivneAz3r_fbR_q","pre":"_1WRCfoXbi4rkPCzmG0th0X","play":"_16VJK_hxQapqtBzd8QcuaB","pause":"bft_N4DMAmjg60j4iIuki","next":"_3BH5C7tZykiTF86TIyWupX","locked":"_3cE5q2nJ99w-etYYx26Efg","wrap":"vINSyRzBeuUl7R2WB5PUW","btns":"_1tjdPRM-AXg0O5LsIgmTdD","play-progress":"jRoMkVBB0-yixxxqH_63R","info":"_1s5hO3FbfXGu31bohO1qUV","title":"_3bc5PCNuPN4g3vFYBJ_opl","singer":"_1Ni8FU_81qB6be5Tt4QyCO","progress":"_1MV13Oax8_IduPxoauhZYh","dot":"_3Bm1D0pVLYUcEJlK4qx4_S","played":"sGbUxUdHO75_n9ThBzLRy","right":"_1oMrWdLC7DIC6hsBUY28CX"};
+module.exports = {"playbar":"_2Y-tL3L1kx61UQcJTlBEJB","left":"_1B4xNNBzaLR4p8zi7kXo9e","lock-section":"pgobEfvylUbensiDpFUuG","lock":"_3TpsLcjQmf9SKl7MU9o6A7","fill":"_1mxXyKJHivneAz3r_fbR_q","pre":"_1WRCfoXbi4rkPCzmG0th0X","play":"_16VJK_hxQapqtBzd8QcuaB","pause":"bft_N4DMAmjg60j4iIuki","next":"_3BH5C7tZykiTF86TIyWupX","locked":"_3cE5q2nJ99w-etYYx26Efg","wrap":"vINSyRzBeuUl7R2WB5PUW","btns":"_1tjdPRM-AXg0O5LsIgmTdD","play-progress":"jRoMkVBB0-yixxxqH_63R","info":"_1s5hO3FbfXGu31bohO1qUV","title":"_3bc5PCNuPN4g3vFYBJ_opl","singer":"_1Ni8FU_81qB6be5Tt4QyCO","progress":"_1MV13Oax8_IduPxoauhZYh","dot":"_3Bm1D0pVLYUcEJlK4qx4_S","played":"sGbUxUdHO75_n9ThBzLRy","time":"_1nHdmNZVvGcIDSdKXEfVTc","played-time":"_1CuUWQmbiU7K6CJt1PezP6","right":"_1oMrWdLC7DIC6hsBUY28CX"};
 
 /***/ }),
 /* 619 */

@@ -58423,6 +58423,7 @@ var cx = _bind2.default.bind(_Playbar2.default);
 var tag = false;
 var mouseMoveType = null;
 var progressLenth = 490;
+var interval = void 0;
 
 var Playbar = function (_Component) {
     _inherits(Playbar, _Component);
@@ -58443,7 +58444,8 @@ var Playbar = function (_Component) {
             isRunning: false,
             progress: 0,
             duration: '00:00',
-            playedTime: '00:00'
+            playedTime: '00:00',
+            buffered: 0
         };
         return _this;
     }
@@ -58482,17 +58484,22 @@ var Playbar = function (_Component) {
                     }
                 });
                 var vid = (0, _jquery2.default)('audio')[0];
-                vid.src = _2.default;
                 vid.onloadeddata = function () {
                     _this2.setState({ 'duration': _this2.convert(vid.duration) });
                 };
 
-                vid.ontimeupdate = function () {
-                    if (!tag) {
-                        _this2.setState({ 'progress': vid.currentTime / vid.duration * 100 + '%' });
-                        _this2.setState({ 'playedTime': _this2.convert(vid.currentTime) });
-                    }
+                vid.onended = function () {
+                    window.clearInterval(interval);
                 };
+                vid.src = _2.default;
+                // there's a issue with ontimeupdate, the time change is not smooth, so I decided to use setInterval
+                // vid.ontimeupdate = () => {
+                //     if (!tag) {
+                //         this.setState({ 'progress': `${vid.currentTime / vid.duration * 100}%` });
+                //         this.setState({ 'playedTime': this.convert(vid.currentTime) });
+                //     }
+
+                // };
             }, 0);
         }
     }, {
@@ -58518,7 +58525,18 @@ var Playbar = function (_Component) {
     }, {
         key: 'play',
         value: function play() {
-            (0, _jquery2.default)('audio')[0].play();
+            var _this3 = this;
+
+            var vid = (0, _jquery2.default)('audio')[0];
+            vid.play();
+
+            interval = window.setInterval(function () {
+                if (!tag) {
+                    _this3.setState({ 'progress': vid.currentTime / vid.duration * 100 + '%' });
+                    _this3.setState({ 'playedTime': _this3.convert(vid.currentTime) });
+                    _this3.setState({ 'buffered': vid.buffered.end(0) / vid.duration * 100 + '%' });
+                }
+            }, 500);
             this.setState({ isRunning: true });
         }
     }, {
@@ -58526,11 +58544,12 @@ var Playbar = function (_Component) {
         value: function pause() {
             (0, _jquery2.default)('audio')[0].pause();
             this.setState({ isRunning: false });
+            window.clearInterval(interval);
         }
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
+            var _this4 = this;
 
             var lockClass = cx({
                 'lock': true,
@@ -58556,9 +58575,9 @@ var Playbar = function (_Component) {
                             { className: _Playbar2.default.btns },
                             _react2.default.createElement('a', { className: _Playbar2.default.pre }),
                             _react2.default.createElement('a', { onClick: this.state.isRunning ? function () {
-                                    return _this3.pause();
+                                    return _this4.pause();
                                 } : function () {
-                                    return _this3.play();
+                                    return _this4.play();
                                 }, className: this.state.isRunning ? _Playbar2.default.pause : _Playbar2.default.play }),
                             _react2.default.createElement('a', { className: _Playbar2.default.next })
                         ),
@@ -58582,11 +58601,12 @@ var Playbar = function (_Component) {
                             _react2.default.createElement(
                                 'div',
                                 { onClick: function onClick(e) {
-                                        return _this3.clickProgressBar(e);
+                                        return _this4.clickProgressBar(e);
                                     }, className: _Playbar2.default.progress },
                                 _react2.default.createElement('div', { style: { 'width': this.state.progress }, className: _Playbar2.default.played }),
+                                _react2.default.createElement('div', { style: { 'width': this.state.buffered }, className: _Playbar2.default.buffered }),
                                 _react2.default.createElement('span', { style: { 'left': this.state.progress }, onMouseDown: function onMouseDown(e) {
-                                        return _this3.progressMoveStart(e);
+                                        return _this4.progressMoveStart(e);
                                     }, className: _Playbar2.default.dot }),
                                 _react2.default.createElement(
                                     'span',
@@ -58610,7 +58630,7 @@ var Playbar = function (_Component) {
                         'div',
                         { className: _Playbar2.default['lock-section'] },
                         _react2.default.createElement('div', { onClick: function onClick() {
-                                return _this3.lockPlaybar();
+                                return _this4.lockPlaybar();
                             }, className: lockClass })
                     ),
                     _react2.default.createElement('div', { className: _Playbar2.default.fill })
@@ -58629,7 +58649,7 @@ exports.default = Playbar;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"playbar":"_2Y-tL3L1kx61UQcJTlBEJB","left":"_1B4xNNBzaLR4p8zi7kXo9e","lock-section":"pgobEfvylUbensiDpFUuG","lock":"_3TpsLcjQmf9SKl7MU9o6A7","fill":"_1mxXyKJHivneAz3r_fbR_q","pre":"_1WRCfoXbi4rkPCzmG0th0X","play":"_16VJK_hxQapqtBzd8QcuaB","pause":"bft_N4DMAmjg60j4iIuki","next":"_3BH5C7tZykiTF86TIyWupX","locked":"_3cE5q2nJ99w-etYYx26Efg","wrap":"vINSyRzBeuUl7R2WB5PUW","btns":"_1tjdPRM-AXg0O5LsIgmTdD","play-progress":"jRoMkVBB0-yixxxqH_63R","info":"_1s5hO3FbfXGu31bohO1qUV","title":"_3bc5PCNuPN4g3vFYBJ_opl","singer":"_1Ni8FU_81qB6be5Tt4QyCO","progress":"_1MV13Oax8_IduPxoauhZYh","dot":"_3Bm1D0pVLYUcEJlK4qx4_S","played":"sGbUxUdHO75_n9ThBzLRy","time":"_1nHdmNZVvGcIDSdKXEfVTc","played-time":"_1CuUWQmbiU7K6CJt1PezP6","right":"_1oMrWdLC7DIC6hsBUY28CX"};
+module.exports = {"playbar":"_2Y-tL3L1kx61UQcJTlBEJB","left":"_1B4xNNBzaLR4p8zi7kXo9e","lock-section":"pgobEfvylUbensiDpFUuG","lock":"_3TpsLcjQmf9SKl7MU9o6A7","fill":"_1mxXyKJHivneAz3r_fbR_q","pre":"_1WRCfoXbi4rkPCzmG0th0X","play":"_16VJK_hxQapqtBzd8QcuaB","pause":"bft_N4DMAmjg60j4iIuki","next":"_3BH5C7tZykiTF86TIyWupX","locked":"_3cE5q2nJ99w-etYYx26Efg","wrap":"vINSyRzBeuUl7R2WB5PUW","btns":"_1tjdPRM-AXg0O5LsIgmTdD","play-progress":"jRoMkVBB0-yixxxqH_63R","info":"_1s5hO3FbfXGu31bohO1qUV","title":"_3bc5PCNuPN4g3vFYBJ_opl","singer":"_1Ni8FU_81qB6be5Tt4QyCO","progress":"_1MV13Oax8_IduPxoauhZYh","dot":"_3Bm1D0pVLYUcEJlK4qx4_S","played":"sGbUxUdHO75_n9ThBzLRy","buffered":"_19CHYc0_AtOSI37DAM99l6","time":"_1nHdmNZVvGcIDSdKXEfVTc","played-time":"_1CuUWQmbiU7K6CJt1PezP6","right":"_1oMrWdLC7DIC6hsBUY28CX"};
 
 /***/ }),
 /* 619 */

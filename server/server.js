@@ -58562,78 +58562,112 @@ var Playbar = function (_Component) {
 
             return _react2.default.createElement(
                 'div',
-                { className: playbarClass },
-                _react2.default.createElement('audio', null),
+                null,
                 _react2.default.createElement(
                     'div',
-                    { className: _Playbar2.default.left },
+                    { className: '' + _Playbar2.default['playbar-mobile'] },
                     _react2.default.createElement(
                         'div',
-                        { className: _Playbar2.default.wrap },
+                        { className: _Playbar2.default.info },
                         _react2.default.createElement(
                             'div',
-                            { className: _Playbar2.default.btns },
-                            _react2.default.createElement('a', { className: _Playbar2.default.pre }),
-                            _react2.default.createElement('a', { onClick: this.state.isRunning ? function () {
-                                    return _this4.pause();
-                                } : function () {
-                                    return _this4.play();
-                                }, className: this.state.isRunning ? _Playbar2.default.pause : _Playbar2.default.play }),
-                            _react2.default.createElement('a', { className: _Playbar2.default.next })
+                            { className: _Playbar2.default.song },
+                            '\u6211\u8981\u5FEB\u4E50'
                         ),
                         _react2.default.createElement(
                             'div',
-                            { className: _Playbar2.default['play-progress'] },
-                            _react2.default.createElement(
-                                'div',
-                                { className: _Playbar2.default.info },
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: _Playbar2.default.title },
-                                    '\u6211\u8981\u5FEB\u4E50'
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: _Playbar2.default.singer },
-                                    '\u66FE\u4E00\u9E23'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { onClick: function onClick(e) {
-                                        return _this4.clickProgressBar(e);
-                                    }, className: _Playbar2.default.progress },
-                                _react2.default.createElement('div', { style: { 'width': this.state.progress }, className: _Playbar2.default.played }),
-                                _react2.default.createElement('div', { style: { 'width': this.state.buffered }, className: _Playbar2.default.buffered }),
-                                _react2.default.createElement('span', { style: { 'left': this.state.progress }, onMouseDown: function onMouseDown(e) {
-                                        return _this4.progressMoveStart(e);
-                                    }, className: _Playbar2.default.dot }),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: _Playbar2.default.time },
-                                    _react2.default.createElement(
-                                        'span',
-                                        { className: _Playbar2.default['played-time'] },
-                                        this.state.playedTime
-                                    ),
-                                    '/',
-                                    this.state.duration
-                                )
-                            )
+                            { className: _Playbar2.default.singer },
+                            '\u66FE\u4E00\u9E23'
                         )
-                    )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: _Playbar2.default.btns },
+                        this.state.isRunning ? _react2.default.createElement('div', { onClick: function onClick() {
+                                return _this4.pause();
+                            }, 'class': 'iconfont play icon-stop' }) : _react2.default.createElement('div', { onClick: function onClick() {
+                                return _this4.play();
+                            }, 'class': 'iconfont play icon-play' }),
+                        _react2.default.createElement('div', { 'class': 'iconfont icon-next' }),
+                        _react2.default.createElement('div', { 'class': 'iconfont icon-list' })
+                    ),
+                    _react2.default.createElement('div', { style: { 'width': this.state.progress }, className: _Playbar2.default.progress })
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: _Playbar2.default.right },
+                    { className: '' + playbarClass },
+                    _react2.default.createElement('audio', null),
                     _react2.default.createElement(
                         'div',
-                        { className: _Playbar2.default['lock-section'] },
-                        _react2.default.createElement('div', { onClick: function onClick() {
-                                return _this4.lockPlaybar();
-                            }, className: lockClass })
+                        { className: _Playbar2.default.left },
+                        _react2.default.createElement(
+                            'div',
+                            { className: _Playbar2.default.wrap },
+                            _react2.default.createElement(
+                                'div',
+                                { className: _Playbar2.default.btns },
+                                _react2.default.createElement('a', { className: _Playbar2.default.pre }),
+                                _react2.default.createElement('a', { onClick: this.state.isRunning ? function () {
+                                        return _this4.pause();
+                                    } : function () {
+                                        return _this4.play();
+                                    }, className: this.state.isRunning ? _Playbar2.default.pause : _Playbar2.default.play }),
+                                _react2.default.createElement('a', { className: _Playbar2.default.next })
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { className: _Playbar2.default['play-progress'] },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: _Playbar2.default.info },
+                                    _react2.default.createElement(
+                                        'span',
+                                        { className: _Playbar2.default.title },
+                                        '\u6211\u8981\u5FEB\u4E50'
+                                    ),
+                                    _react2.default.createElement(
+                                        'span',
+                                        { className: _Playbar2.default.singer },
+                                        '\u66FE\u4E00\u9E23'
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    { onClick: function onClick(e) {
+                                            return _this4.clickProgressBar(e);
+                                        }, className: _Playbar2.default.progress },
+                                    _react2.default.createElement('div', { style: { 'width': this.state.progress }, className: _Playbar2.default.played }),
+                                    _react2.default.createElement('div', { style: { 'width': this.state.buffered }, className: _Playbar2.default.buffered }),
+                                    _react2.default.createElement('span', { style: { 'left': this.state.progress }, onMouseDown: function onMouseDown(e) {
+                                            return _this4.progressMoveStart(e);
+                                        }, className: _Playbar2.default.dot }),
+                                    _react2.default.createElement(
+                                        'span',
+                                        { className: _Playbar2.default.time },
+                                        _react2.default.createElement(
+                                            'span',
+                                            { className: _Playbar2.default['played-time'] },
+                                            this.state.playedTime
+                                        ),
+                                        '/',
+                                        this.state.duration
+                                    )
+                                )
+                            )
+                        )
                     ),
-                    _react2.default.createElement('div', { className: _Playbar2.default.fill })
+                    _react2.default.createElement(
+                        'div',
+                        { className: _Playbar2.default.right },
+                        _react2.default.createElement(
+                            'div',
+                            { className: _Playbar2.default['lock-section'] },
+                            _react2.default.createElement('div', { onClick: function onClick() {
+                                    return _this4.lockPlaybar();
+                                }, className: lockClass })
+                        ),
+                        _react2.default.createElement('div', { className: _Playbar2.default.fill })
+                    )
                 )
             );
         }
@@ -58649,7 +58683,7 @@ exports.default = Playbar;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"playbar":"_2Y-tL3L1kx61UQcJTlBEJB","left":"_1B4xNNBzaLR4p8zi7kXo9e","lock-section":"pgobEfvylUbensiDpFUuG","lock":"_3TpsLcjQmf9SKl7MU9o6A7","fill":"_1mxXyKJHivneAz3r_fbR_q","pre":"_1WRCfoXbi4rkPCzmG0th0X","play":"_16VJK_hxQapqtBzd8QcuaB","pause":"bft_N4DMAmjg60j4iIuki","next":"_3BH5C7tZykiTF86TIyWupX","locked":"_3cE5q2nJ99w-etYYx26Efg","wrap":"vINSyRzBeuUl7R2WB5PUW","btns":"_1tjdPRM-AXg0O5LsIgmTdD","play-progress":"jRoMkVBB0-yixxxqH_63R","info":"_1s5hO3FbfXGu31bohO1qUV","title":"_3bc5PCNuPN4g3vFYBJ_opl","singer":"_1Ni8FU_81qB6be5Tt4QyCO","progress":"_1MV13Oax8_IduPxoauhZYh","dot":"_3Bm1D0pVLYUcEJlK4qx4_S","played":"sGbUxUdHO75_n9ThBzLRy","buffered":"_19CHYc0_AtOSI37DAM99l6","time":"_1nHdmNZVvGcIDSdKXEfVTc","played-time":"_1CuUWQmbiU7K6CJt1PezP6","right":"_1oMrWdLC7DIC6hsBUY28CX"};
+module.exports = {"playbar":"_2Y-tL3L1kx61UQcJTlBEJB","left":"_1B4xNNBzaLR4p8zi7kXo9e","lock-section":"pgobEfvylUbensiDpFUuG","lock":"_3TpsLcjQmf9SKl7MU9o6A7","fill":"_1mxXyKJHivneAz3r_fbR_q","pre":"_1WRCfoXbi4rkPCzmG0th0X","play":"_16VJK_hxQapqtBzd8QcuaB","pause":"bft_N4DMAmjg60j4iIuki","next":"_3BH5C7tZykiTF86TIyWupX","locked":"_3cE5q2nJ99w-etYYx26Efg","wrap":"vINSyRzBeuUl7R2WB5PUW","btns":"_1tjdPRM-AXg0O5LsIgmTdD","play-progress":"jRoMkVBB0-yixxxqH_63R","info":"_1s5hO3FbfXGu31bohO1qUV","title":"_3bc5PCNuPN4g3vFYBJ_opl","singer":"_1Ni8FU_81qB6be5Tt4QyCO","progress":"_1MV13Oax8_IduPxoauhZYh","dot":"_3Bm1D0pVLYUcEJlK4qx4_S","played":"sGbUxUdHO75_n9ThBzLRy","buffered":"_19CHYc0_AtOSI37DAM99l6","time":"_1nHdmNZVvGcIDSdKXEfVTc","played-time":"_1CuUWQmbiU7K6CJt1PezP6","right":"_1oMrWdLC7DIC6hsBUY28CX","playbar-mobile":"_2umxXPVGKry9mrwPI9myZy","song":"_1juWd9_EzVv6v4eoIkLKEN"};
 
 /***/ }),
 /* 619 */

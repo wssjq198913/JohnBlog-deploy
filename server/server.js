@@ -58445,7 +58445,9 @@ var Playbar = function (_Component) {
             progress: 0,
             duration: '00:00',
             playedTime: '00:00',
-            buffered: 0
+            buffered: 0,
+            loading: false,
+            timeWhenLoading: 0
         };
         return _this;
     }
@@ -58491,6 +58493,12 @@ var Playbar = function (_Component) {
                 vid.onended = function () {
                     window.clearInterval(interval);
                 };
+
+                vid.onwaiting = function () {
+                    _this2.setState({ 'loading': true });
+                    _this2.setState({ 'timeWhenLoading': vid.currentTime });
+                };
+
                 vid.src = _2.default;
                 // there's a issue with ontimeupdate, the time change is not smooth, so I decided to use setInterval
                 // vid.ontimeupdate = () => {
@@ -58535,6 +58543,9 @@ var Playbar = function (_Component) {
                     _this3.setState({ 'progress': vid.currentTime / vid.duration * 100 + '%' });
                     _this3.setState({ 'playedTime': _this3.convert(vid.currentTime) });
                     _this3.setState({ 'buffered': vid.buffered.end(0) / vid.duration * 100 + '%' });
+                    if (vid.currentTime > _this3.state.timeWhenLoading) {
+                        _this3.setState({ 'loading': false });
+                    }
                 }
             }, 500);
             this.setState({ isRunning: true });
@@ -58585,9 +58596,13 @@ var Playbar = function (_Component) {
                         { className: _Playbar2.default.btns },
                         this.state.isRunning ? _react2.default.createElement('div', { onClick: function onClick() {
                                 return _this4.pause();
-                            }, 'class': 'iconfont play icon-stop' }) : _react2.default.createElement('div', { onClick: function onClick() {
-                                return _this4.play();
-                            }, 'class': 'iconfont play icon-play' }),
+                            }, 'class': 'iconfont play icon-stop' }) : _react2.default.createElement(
+                            'div',
+                            { onClick: function onClick() {
+                                    return _this4.play();
+                                }, 'class': 'iconfont play icon-play' },
+                            _react2.default.createElement('i', { className: this.state.loading ? _Playbar2.default.loading : '' })
+                        ),
                         _react2.default.createElement('div', { 'class': 'iconfont icon-next' }),
                         _react2.default.createElement('div', { 'class': 'iconfont icon-list' })
                     ),
@@ -58638,9 +58653,13 @@ var Playbar = function (_Component) {
                                         }, className: _Playbar2.default.progress },
                                     _react2.default.createElement('div', { style: { 'width': this.state.progress }, className: _Playbar2.default.played }),
                                     _react2.default.createElement('div', { style: { 'width': this.state.buffered }, className: _Playbar2.default.buffered }),
-                                    _react2.default.createElement('span', { style: { 'left': this.state.progress }, onMouseDown: function onMouseDown(e) {
-                                            return _this4.progressMoveStart(e);
-                                        }, className: _Playbar2.default.dot }),
+                                    _react2.default.createElement(
+                                        'span',
+                                        { style: { 'left': this.state.progress }, onMouseDown: function onMouseDown(e) {
+                                                return _this4.progressMoveStart(e);
+                                            }, className: _Playbar2.default.dot },
+                                        _react2.default.createElement('i', { className: this.state.loading ? _Playbar2.default.loading : '' })
+                                    ),
                                     _react2.default.createElement(
                                         'span',
                                         { className: _Playbar2.default.time },
@@ -58683,7 +58702,7 @@ exports.default = Playbar;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"playbar":"_2Y-tL3L1kx61UQcJTlBEJB","left":"_1B4xNNBzaLR4p8zi7kXo9e","lock-section":"pgobEfvylUbensiDpFUuG","lock":"_3TpsLcjQmf9SKl7MU9o6A7","fill":"_1mxXyKJHivneAz3r_fbR_q","pre":"_1WRCfoXbi4rkPCzmG0th0X","play":"_16VJK_hxQapqtBzd8QcuaB","pause":"bft_N4DMAmjg60j4iIuki","next":"_3BH5C7tZykiTF86TIyWupX","locked":"_3cE5q2nJ99w-etYYx26Efg","wrap":"vINSyRzBeuUl7R2WB5PUW","btns":"_1tjdPRM-AXg0O5LsIgmTdD","play-progress":"jRoMkVBB0-yixxxqH_63R","info":"_1s5hO3FbfXGu31bohO1qUV","title":"_3bc5PCNuPN4g3vFYBJ_opl","singer":"_1Ni8FU_81qB6be5Tt4QyCO","progress":"_1MV13Oax8_IduPxoauhZYh","dot":"_3Bm1D0pVLYUcEJlK4qx4_S","played":"sGbUxUdHO75_n9ThBzLRy","buffered":"_19CHYc0_AtOSI37DAM99l6","time":"_1nHdmNZVvGcIDSdKXEfVTc","played-time":"_1CuUWQmbiU7K6CJt1PezP6","right":"_1oMrWdLC7DIC6hsBUY28CX","playbar-mobile":"_2umxXPVGKry9mrwPI9myZy","song":"_1juWd9_EzVv6v4eoIkLKEN"};
+module.exports = {"playbar":"_2Y-tL3L1kx61UQcJTlBEJB","left":"_1B4xNNBzaLR4p8zi7kXo9e","lock-section":"pgobEfvylUbensiDpFUuG","lock":"_3TpsLcjQmf9SKl7MU9o6A7","fill":"_1mxXyKJHivneAz3r_fbR_q","pre":"_1WRCfoXbi4rkPCzmG0th0X","play":"_16VJK_hxQapqtBzd8QcuaB","pause":"bft_N4DMAmjg60j4iIuki","next":"_3BH5C7tZykiTF86TIyWupX","locked":"_3cE5q2nJ99w-etYYx26Efg","wrap":"vINSyRzBeuUl7R2WB5PUW","btns":"_1tjdPRM-AXg0O5LsIgmTdD","play-progress":"jRoMkVBB0-yixxxqH_63R","info":"_1s5hO3FbfXGu31bohO1qUV","title":"_3bc5PCNuPN4g3vFYBJ_opl","singer":"_1Ni8FU_81qB6be5Tt4QyCO","progress":"_1MV13Oax8_IduPxoauhZYh","dot":"_3Bm1D0pVLYUcEJlK4qx4_S","loading":"_2KkACnSGY5Q4x_U2DivCot","played":"sGbUxUdHO75_n9ThBzLRy","buffered":"_19CHYc0_AtOSI37DAM99l6","time":"_1nHdmNZVvGcIDSdKXEfVTc","played-time":"_1CuUWQmbiU7K6CJt1PezP6","right":"_1oMrWdLC7DIC6hsBUY28CX","playbar-mobile":"_2umxXPVGKry9mrwPI9myZy","song":"_1juWd9_EzVv6v4eoIkLKEN"};
 
 /***/ }),
 /* 619 */

@@ -58344,10 +58344,14 @@ var Navbar = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { className: _Burger2.default.burger, onClick: this.props.click },
-                _react2.default.createElement('p', null),
-                _react2.default.createElement('p', null),
-                _react2.default.createElement('p', null)
+                { className: _Burger2.default['burger-wrap'] },
+                _react2.default.createElement(
+                    'div',
+                    { className: _Burger2.default.burger, onClick: this.props.click },
+                    _react2.default.createElement('p', null),
+                    _react2.default.createElement('p', null),
+                    _react2.default.createElement('p', null)
+                )
             );
         }
     }]);
@@ -58362,7 +58366,7 @@ exports.default = Navbar;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"burger":"jESVUhAi-x_7Ul4oPk9OK"};
+module.exports = {"burger":"jESVUhAi-x_7Ul4oPk9OK","burger-wrap":"eqWoPcilQ1EuU8dHU3t-g"};
 
 /***/ }),
 /* 614 */
